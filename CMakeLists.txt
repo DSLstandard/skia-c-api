@@ -8,10 +8,9 @@ include_directories(${SKIA_INCLUDE_DIRS})
 link_directories(${SKIA_LIBRARY_DIRS})
 
 # ** Bundle up all cbits/*.cpp sources
-set(CBITS_DIR "${CMAKE_SOURCE_DIR}/../cbits")
-file(GLOB CBITS_SOURCES "${CBITS_DIR}/src/*.cpp")
-add_library(skia_capi_objs OBJECT ${CBITS_SOURCES})
-target_include_directories(skia_capi_objs PRIVATE ${CBITS_DIR} ${CBITS_DIR}/fake_headers)
+file(GLOB SOURCE_FILES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+add_library(skia_capi_objs OBJECT ${SOURCE_FILES})
+target_include_directories(skia_capi_objs PRIVATE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/fake_headers)
 target_compile_options(skia_capi_objs PRIVATE -Wall ${SKIA_CFLAGS})
 
 # Define -DSK_GANESH. Skia graphics/GPU utils related. I am not sure what this
@@ -20,8 +19,8 @@ target_compile_definitions(skia_capi_objs PRIVATE -DSK_GANESH)
 
 # NOTE: If we don't use PCHs, the compilation speed is intolerable - using PCHs
 # is obligatory.
-target_precompile_headers(skia_capi_objs PRIVATE "${CBITS_DIR}/skia_capi/sk_types.h")
-target_precompile_headers(skia_capi_objs PRIVATE "${CBITS_DIR}/src/common_include_pch.hpp" INTERFACE "${CBITS_DIR}/skia_capi/sk_types.h")
+target_precompile_headers(skia_capi_objs PRIVATE "${CMAKE_SOURCE_DIR}/skia_capi/sk_types.h")
+target_precompile_headers(skia_capi_objs PRIVATE "${CMAKE_SOURCE_DIR}/src/common_include_pch.hpp" INTERFACE "${CMAKE_SOURCE_DIR}/skia_capi/sk_types.h")
 
 # ** Misc variables
 
