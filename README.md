@@ -3,7 +3,7 @@
 A Skia (milestone: m129) API for C, and a fork of https://github.com/mono/skia with the following changes:
 
 - Added additional (but very incomplete) C APIs for modules like SkUnicode, SkParagraph, & SkSVG.
-- Modified to build an external shared/static C library of Skia.
+- Modified to build an external shared/static C library that interfaces with Skia.
 
 This project was originally a part of https://github.com/DSLstandard/hs-skia,
 but it is now unused in hs-skia. To not be wasteful, the project sources have
